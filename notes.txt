@@ -1,0 +1,247 @@
+Log
+started this practice thing
+16.8.2022
+videos part 1 and 2
+reviewed part 1, have to review part 2
+
+some stuff
+"which software architecture you follow to build this project"
+"For the backend REST API built in these first 4 tutorials, you could say I used the Model-View-Controller pattern although we are not focused on the View aspect"
+"yes, each repository has its own architecture. In this project, the backend can be considered MVC. The frontend is a React SPA with React Router."
+
+Parts of this project
+1. Start                    https://www.youtube.com/watch?v=H-9l-gTq-C4
+2. Middleware               https://www.youtube.com/watch?v=JR9BeI7FY3M
+3. MongoDB                  https://www.youtube.com/watch?v=cUV3uYXEOxI
+4. Controllers & Routers    https://www.youtube.com/watch?v=Iw_LHrip-iw
+5. React                    https://www.youtube.com/watch?v=5cc09qZK0VU
+
+
+
+
+
+1. Start
+
+What is Mern?
+MongoDB     (database)
+ExpressJS   ()
+React       ()
+NodeJS      ()
+
+What is Full Stack?
+a fullstack application means it requires code that runs on the server
+and code that runs on the browser
+code in server = backend
+code in browser = frontend
+
+CRUD
+Create
+Read
+Update
+Delete
+
+http requests
+
+Create = Post
+Read = Get
+Update = Patch/Put
+Delete = Delete
+
+
+
+UserStories.md
+ctrl+k then press v
+
+
+
+Stuff after npm init
+- description added in json
+- removed test script from json
+- added start node server and dev nodemon server scripts in json
+- .gitignore node_modules
+
+
+
+
+
+2. Middleware
+
+What is Middleware
+
+just one or more functions that are placed in the path of a request that are received by our backend API
+can add additional functionality for the API
+preliminary request processing (before they get to the controller where request processing will be completed)
+
+Middleware types:
+
+- built-in
+- custom
+- 3rd party
+
+what do we do in this part
+
+adding app.use json to process json
+
+creating logs folder
+creating middleware folder
+
+installing date-fns and uuid
+
+in middleware folder: logger.js
+
+purpose of logger is to log errors and stuff
+it needs to be able to tell what happened and when and where
+uses date thing and uuid
+date-fns: date stuff so you know when stuff happened
+uuid: random id to be able to tell logs apart or something
+use fs and fspromises, for promise stuff?
+uses path
+(\t between message stuff is tab, good if you want the log into excel or something)
+
+in middleware folder: errorhandler.js
+make it
+
+for next bit
+install cookieparser (this is a 3rd party middleware)
+(why?)
+can parse cookies we receive
+
+now to cover something complicated that must be added every time
+you create a rest api (or at least consider or something)
+trying to fetch
+get cors error
+
+what is cors
+cors policy
+cross origin resource sharing
+first line of security
+google not supposed to be able to request stuff from api
+unless we allow
+
+install cors
+
+set things up as if public api, then change
+import cors
+app.use cors()
+this is basic default public api
+
+now we want to secure it
+so that only those who we want can get access
+cors options
+
+create folder config
+create allowedOrigins.js in there
+const allowedOrigins with list of strings that are urls, allowed urls
+export
+
+create corsOptions.js
+import allowedOrigins
+const corsOptions
+function that needs origin, callback
+this is a 3rd party middleware so we have to follow the rules they have set up
+look up object where we check origin, receive origin and callback
+if allowedOrigin has the origin in its array
+
+(allowedOrigins and corsOptions could be in the same file
+but it's better for them to be in separate files
+if you want to get something from them with some other thing)
+
+
+
+Part 3. MongoDB
+
+NoSQL database built with collections of documents
+(check dave gray nodejs 7h full course)
+
+install dotenv
+allows environment variables inside our restapi
+environment variables are values that we want to use on the server when we deploy
+but we don't want to store them in github
+(later about that?)
+
+on server.js add to the very top
+require('dotenv').config()
+(no const?)
+
+lets create dotenv file
+.env on the same level as server.js
+we can put in there variables that we can pull out as environment variables
+env variables are generally all caps
+
+now back in server.js
+somewhere towards the top (below imports)
+console.log(process.env.NODE_ENV)
+we log that value when we start the server
+it is logged on console
+process.env is used to pull a variable from env
+process.env.NODE_ENV, the name of the variable we want
+comes after the process.env
+
+now when server is started we see in console
+before "server running on port..."
+we see "development"
+because it's the value in NODE_ENV
+
+add .env into gitignore
+
+now set up mongodb account
+and mongo stuff
+in .env DATABASE_URI, put here connection string that we get from mongodb
+
+when setting up mongodb stuff, rename project name or something into
+techNotesDB
+(part 3, timestamp 5:10)
+
+mongodb is set up
+install mongoose
+
+create new folder "models"
+this is for data models
+
+in models create file Users.js
+in Users.js
+import mongoose
+after that create schema that allows us to have a data model
+new mongoose.Schema({})
+inside our user schema is where we will have our data model
+so we have to think about the different types of data that a user needs to store
+check user stories to see and get an idea for the data required
+(part 3, timestamp 13:20)
+
+review the stuff in that timestamp
+regarding userchema, username, password, roles
+
+
+
+installed mongoose-sequence
+
+remember to review a bit more
+
+
+
+4. Controllers & Routers
+
+Need routing and controllers to complete CRUD operations
+when those are complete we have full functioning REST API for the backend of our project
+
+REST API
+REST is an acronym for REpresentational State Transfer and an architectural style for distributed hypermedia systems.
+REpresentational State Transfer
+API = Application Programming Interface
+
+
+create controllers folder
+create usersController.js
+
+install npm i express-async-handler bcrypt
+
+downloading and installing postman from postman.com
+
+student challenge
+at the end tutorial wants for you to make notesController by yourself if possible
+
+--- notesController not done ---
+
+5. React
+
+frontend
